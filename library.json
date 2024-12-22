@@ -1,0 +1,24 @@
+{
+  "name": "Arduino-ALTRO",
+  "keywords": "Arduino, ALTRO, Augmented Lagrangian, Optimization, Linear, Quadratic, Nonlinear, Programming, Regulator, Solver",
+  "description": "A port version for ArduinoIDE of ALTRO (Augmented Lagrangian TRajectory Optimizer).",
+  "repository":
+  {
+      "type": "git",
+      "url": "https://github.com/Kaiserreich-Unofficial/Arduino-ALTRO.git"
+  },
+  "authors":
+  {
+      "name": "bjack205",
+      "url": "https://github.com/bjack205/altro",
+      "maintainer": true
+  },
+  "version": "0.1.0",
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "*",
+  "dependencies":
+  {
+      "hideakitai/ArduinoEigen": "*"
+  }
+}
