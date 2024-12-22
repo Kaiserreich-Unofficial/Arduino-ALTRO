@@ -425,8 +425,10 @@ ErrorCodes ALTROSolver::CheckKnotPointIndices(int &k_start, int &k_stop,
   }
   if (k_stop > 0 && k_stop <= k_start) {
     // clang-format off
-    fmt::print("WARNING [ALTRO]: Stopping index {} not greater than starting index {}. Index range is empty.\n", k_stop, k_stop);
-    fmt::print("                 To set a single index, set k_stop = k_start + 1.");
+    // fmt::print("WARNING [ALTRO]: Stopping index {} not greater than starting index {}. Index range is empty.\n", k_stop, k_stop);
+    // fmt::print("                 To set a single index, set k_stop = k_start + 1.");
+    Serial.println("WARNING [ALTRO]: Stopping index" + String(k_stop) + " not greater than starting index" + String(k_stop) + ". Index range is empty.");
+    Serial.print("                 To set a single index, set k_stop = k_start + 1.");
     // clang-format on
   }
   return ErrorCodes::NoError;
@@ -462,16 +464,36 @@ ErrorCodes ALTROSolver::AssertTimestepsArePositive(std::string msg) const {
 }
 
 void ALTROSolver::PrintStateTrajectory() const {
-  fmt::print("STATE TRAJECTORY:\n");
+  // fmt::print("STATE TRAJECTORY:\n");
+  Serial.println("STATE TRAJECTORY:");
   for (int k = 0; k <= GetHorizonLength(); ++k) {
-    fmt::print(" x[{:03d}]: [{}]\n", k, solver_->data_[k].x_.transpose().eval());
+    // fmt::print(" x[{:03d}]: [{}]\n", k, solver_->data_[k].x_.transpose().eval());
+    Serial.print("x[");
+    Serial.print(k);
+    Serial.print("]: [");
+    for (int i = 0; i < solver_->data_[k].x_.size(); i++) {
+      Serial.print(solver_->data_[k].x_(i));
+      if (i < solver_->data_[k].x_.size() - 1) {
+        Serial.print(", ");
+      }
+    }
   }
 }
 
 void ALTROSolver::PrintInputTrajectory() const {
-  fmt::print("INPUT TRAJECTORY:\n");
+  // fmt::print("INPUT TRAJECTORY:\n");
+  Serial.println("INPUT TRAJECTORY:");
   for (int k = 0; k < GetHorizonLength(); ++k) {
-    fmt::print(" u[{:03d}]: [{}]\n", k, solver_->data_[k].u_.transpose().eval());
+    // fmt::print(" u[{:03d}]: [{}]\n", k, solver_->data_[k].u_.transpose().eval());
+    Serial.print("u[");
+    Serial.print(k);
+    Serial.print("]: [");
+    for (int i = 0; i < solver_->data_[k].u_.size(); i++) {
+      Serial.print(solver_->data_[k].u_(i));
+      if (i < solver_->data_[k].u_.size() - 1) {
+        Serial.print(", ");
+      }
+    }
   }
 }
 
