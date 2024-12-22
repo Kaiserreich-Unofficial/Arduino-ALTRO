@@ -22,7 +22,16 @@ struct fmt::formatter<Eigen::WithFormat<Eigen::Matrix<T, N1, N2>>> : public fmt:
 namespace altro {
 template <class T>
 void PrintVectorRow(std::string label, T x) {
-  fmt::print("{}[{}]\n", label, x.transpose().eval());
+  Serial.print(label.c_str());
+  Serial.print("[");
+  for (int i = 0; i < x.size(); i++) {
+    Serial.print(x(i));
+    if (i < x.size() - 1) {
+      Serial.print(", ");
+    }
+  }
+  Serial.println("]");
+  // fmt::print("{}[{}]\n", label, x.transpose().eval());
 }
 }  // namespace altro
 

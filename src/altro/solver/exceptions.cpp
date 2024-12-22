@@ -99,7 +99,11 @@ namespace altro
 
   void PrintErrorCode(ErrorCodes err)
   {
-    fmt::print("Got error code {}: {}\n", static_cast<int>(err), ErrorCodeToString(err));
+    // fmt::print("Got error code {}: {}\n", static_cast<int>(err), ErrorCodeToString(err));
+    Serial.print("Got error code ");
+    Serial.print(static_cast<int>(err));
+    Serial.print(": ");
+    Serial.println(ErrorCodeToString(err));
   }
 
 } // namespace altro
