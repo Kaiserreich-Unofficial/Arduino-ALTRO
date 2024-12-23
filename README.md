@@ -16,10 +16,17 @@ This is an port version of the C++ implementation of ALTRO (Originated from [bja
 
 This project is open source under the MIT protocol. If this repository infringes on someone's interests, please contact me immediately and I will remove it!
 
+# Dependencies
+
+The Arduino ALTRO library relies on customized libfmt for embedded device development environments, so I've packed it in the library without having to additionally download libfmt and deploy it.
+
+| Name         | URL                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| ArduinoEigen | [hideakitai/ArduinoEigen: Eigen (a C++ template library for linear algebra) for Arduino](https://github.com/hideakitai/ArduinoEigen) |
+| libfmt       | [fmtlib/fmt: A modern formatting librar](https://github.com/fmtlib/fmt)                                                              |
+
 # Notes
 
-
 This project has only been tested on the WeAct STM32H750VBT6 development board so far, which requires at least 150KB of storage space after compilation. So in order to avoid memory explosion, we need to use all the storage space of H750 (including 2MB reserved space), so please select WeAct STM32H743VIT6 when choosing “BoardType”, and uploading mode should be DFU mode, and uploading the program via USB cable.
-
 
 Please use STM32CubeProgrammer to check the size of the chip yourself, if you have a chip with 200KB of program storage, then this is likely to be a problem!
