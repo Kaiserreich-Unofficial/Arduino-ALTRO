@@ -191,11 +191,11 @@ namespace altro
   ErrorCodes SolverImpl::CalcCostGradient()
   {
     if (cost_gradients_up_to_date_) // fmt::print("    Cost grads already up-to-date (CostGradient)\n");
-      Serial.println("    Cost grads already up-to-date (CostGradient)");
+      Serial.println(F("    Cost grads already up-to-date (CostGradient)"));
     if (constraint_jacs_up_to_date_) // fmt::print("    Con Jacs already up-to-date (CostGradient)\n");
-      Serial.println("    Con Jacs already up-to-date (CostGradient)");
+      Serial.println(F("    Con Jacs already up-to-date (CostGradient)"));
     if (conic_jacs_up_to_date_) // fmt::print("    Conic Jacs already up-to-date (CostGradient)\n");
-      Serial.println("    Conic Jacs already up-to-date (CostGradient)");
+      Serial.println(F("    Conic Jacs already up-to-date (CostGradient)"));
     for (auto knot_point = data_.begin(); knot_point < data_.end(); ++knot_point)
     {
       knot_point->CalcCostGradient();
@@ -211,9 +211,9 @@ namespace altro
     // TODO: do this in parallel
     // TODO: don't calculate anything that depends on the initial state?
     if (conic_hessians_up_to_date_) // fmt::print("    Conic hessians already up-to-date (CalcAll)\n");
-      Serial.println("    Conic hessians already up-to-date (CalcAll)");
+      Serial.println(F("    Conic hessians already up-to-date (CalcAll)"));
     if (cost_hessians_up_to_date_) // fmt::print("    Cost hessians already up-to-date (CalcAll)\n");
-      Serial.println("    Cost hessians already up-to-date (CalcAll)");
+      Serial.println(F("    Cost hessians already up-to-date (CalcAll)"));
     for (int k = 0; k <= horizon_length_; ++k)
     {
       KnotPointData &knot_point = data_[k];
@@ -490,9 +490,10 @@ namespace altro
     if (opts.verbose > Verbosity::Silent)
     {
       // fmt::print("STARTING ALTRO iLQR SOLVE....\n");
-      Serial.println("STARTING ALTRO iLQR SOLVE....");
+      Serial.println(F("STARTING ALTRO iLQR SOLVE...."));
       // fmt::print("  Initial Cost: {}\n", cost_initial);
-      Serial.println("  Initial Cost: " + String(cost_initial));
+      Serial.print(F("  Initial Cost: "));
+      Serial.println(cost_initial);
     }
     bool is_converged = false;
     bool stop_iterating = false;
@@ -558,7 +559,30 @@ namespace altro
         //     "{}\n",
         //     iter, phi0_, phi_, cost_decrease, dphi0_, dphi_, alpha, ls_iters_, stationarity,
         //     feasibility, penalty, dual_update);
-        Serial.println("  iter = " + String(iter) + ", phi = " + String(phi0_) + " -> " + String(phi_) + " (" + String(cost_decrease) + "), dphi = " + String(dphi0_) + " -> " + String(dphi_) + ", alpha = " + String(alpha) + ", ls_iter = " + String(ls_iters_) + ", stat = " + String(stationarity) + ", feas = " + String(feasibility) + ", rho = " + String(penalty) + ", dual update? " + String(dual_update));
+        Serial.print(F("  iter = "));
+        Serial.print(iter);
+        Serial.print(F(", phi = "));
+        Serial.print(phi0_);
+        Serial.print(F(" -> "));
+        Serial.print(phi_);
+        Serial.print(F(" ("));
+        Serial.print(cost_decrease);
+        Serial.print(F("), dphi = "));
+        Serial.print(dphi0_);
+        Serial.print(F(" -> "));
+        Serial.print(dphi_);
+        Serial.print(F(", alpha = "));
+        Serial.print(alpha);
+        Serial.print(F(", ls_iter = "));
+        Serial.print(ls_iters_);
+        Serial.print(F(", stat = "));
+        Serial.print(stationarity);
+        Serial.print(F(", feas = "));
+        Serial.print(feasibility);
+        Serial.print(F(", rho = "));
+        Serial.print(penalty);
+        Serial.print(F(", dual update? "));
+        Serial.println(dual_update);
       }
 
       if (stop_iterating)
@@ -572,7 +596,7 @@ namespace altro
     if (opts.verbose > Verbosity::Silent)
     {
       // fmt::print("ALTRO SOLVE FINISHED!\n");
-      Serial.println("ALTRO SOLVE FINISHED!");
+      Serial.println(F("ALTRO SOLVE FINISHED!"));
     }
     return ErrorCodes::NoError;
   }

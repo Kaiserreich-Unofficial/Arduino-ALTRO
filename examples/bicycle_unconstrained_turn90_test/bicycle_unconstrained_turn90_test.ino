@@ -9,7 +9,6 @@ using namespace altro;
 
 void setup()
 {
-  // put your setup code here, to run once:
   Serial.begin(115200);
   while (!Serial)
     ;
@@ -71,7 +70,8 @@ void setup()
 
   // Initial Cost
   a_float cost = solver.CalcCost();
-  Serial.println("Initial cost = " + String(cost));
+  Serial.print(F("Initial cost = "));
+  Serial.println(cost);
 
   // Solve
   unsigned long t_start = millis();
@@ -82,8 +82,11 @@ void setup()
   solver.SetOptions(opts);
   SolveStatus status = solver.Solve();
   unsigned long t_end = millis();
-  Serial.println("status = " + String((int)status));
-  Serial.println("Time Spent = " + String(t_end - t_start) + " ms");
+  Serial.print(F("status = "));
+  Serial.println((int)status);
+  Serial.print(F"Time Spent = ");
+  Serial.print(t_end - t_start)
+  Serial.println(F(" ms"));
 
   // Final state
   Vector xN(n);
@@ -91,11 +94,11 @@ void setup()
   PrintVectorRow("xN = ", xN);
   if ((xN - xf).norm() < 1e-2)
   {
-    Serial.println("Test passed");
+    Serial.println(F("Test passed"));
   }
   else
   {
-    Serial.println("Test failed");
+    Serial.println(F("Test failed"));
   }
 }
 

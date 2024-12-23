@@ -23,14 +23,14 @@ namespace altro {
 template <class T>
 void PrintVectorRow(std::string label, T x) {
   Serial.print(label.c_str());
-  Serial.print("[");
+  Serial.print(F("["));
   for (int i = 0; i < x.size(); i++) {
     Serial.print(x(i));
     if (i < x.size() - 1) {
-      Serial.print(", ");
+      Serial.print(F(", "));
     }
   }
-  Serial.println("]");
+  Serial.println(F("]"));
   // fmt::print("{}[{}]\n", label, x.transpose().eval());
 }
 }  // namespace altro

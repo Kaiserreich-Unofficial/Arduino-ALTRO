@@ -43,24 +43,23 @@ auto jac = MidpointJacobian(n, m, dyn0, jac0);
 
 void setup()
 {
-    // put your setup code here, to run once:
     Serial.begin(115200);
     while (!Serial)
         ;
-    Serial.println("Starting MPC Test");
+    Serial.println(F("Starting MPC Test"));
     Qd = Vector::Constant(n, 1e-2);
     Rd = Vector::Constant(m, 1e-3);
     Qdf = Vector::Constant(n, 1e1);
     // Dimension and Time step
     err = solver.SetDimension(n, m);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Dimension Error");;)
+        for (Serial.println(F("Set Dimension Error"));;)
             ;
 
     // Dynamics
     err = solver.SetExplicitDynamics(dyn, jac);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Explicit Dynamics Error");;)
+        for (Serial.println(F("Set Explicit Dynamics Error"));;)
             ;
 
     // Read Reference Trajectory
@@ -72,7 +71,7 @@ void setup()
     h = t_ref / static_cast<double>(N_ref);
     err = solver.SetTimeStep(h);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Time Step Error");;)
+        for (Serial.println(F("Set Time Step Error"));;)
             ;
 
     // Set Tracking Cost Function
@@ -101,18 +100,18 @@ void setup()
     err = solver.SetConstraint(steering_angle_con, steering_angle_jac, 2, ConstraintType::INEQUALITY,
                                "steering angle bound", 0, N + 1);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Constraint Error");;)
+        for (Serial.println(F("Set Constraint Error"));;)
             ;
     // Initial State
     err = solver.SetInitialState(x_ref[0].data(), n);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Initial State Error");;)
+        for (Serial.println(F("Set Initial State Error"));;)
             ;
 
     // Initialize Solver
     err = solver.Initialize();
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Solver Initialization Error");;)
+        for (Serial.println(F("Solver Initialization Error"));;)
             ;
 
     // Set Initial Trajectory
@@ -121,7 +120,7 @@ void setup()
     u0 << average_speed, 0.0;
     err = solver.SetInput(u0.data(), m);
     if (err != ErrorCodes::NoError)
-        for (Serial.println("Set Input Error");;)
+        for (Serial.println(F("Set Input Error"));;)
             ;
     for (int k = 0; k <= N; ++k)
     {
@@ -169,7 +168,7 @@ void setup()
         // Solve nonlinear MPC problem
         status = solver.Solve();
         if (status != SolveStatus::Success)
-            for (Serial.println("MPC Solve Failed");;)
+            for (Serial.println(F("MPC Solve Failed"));;)
                 ;
         solve_iters.emplace_back(solver.GetIterations());
 
@@ -206,9 +205,13 @@ void setup()
         solver.ShiftTrajectory();
     }
     unsigned long t_end = millis();
-    Serial.println("MPC Solve Completed!");
-    Serial.println("Time Spent = " + String(t_end - t_start) + " ms");
-    Serial.println("Average Rate = " + String(Nsim / (t_end / 1000 - t_start / 1000)) + " Hz");
+    Serial.println(F("MPC Solve Completed!"));
+    Serial.print(F("Time Spent = "));
+    Serial.print(t_end - t_start);
+    Serial.println(F(" ms"));
+    Serial.print(F("Average Rate = "));
+    Serial.print(Nsim / (t_end / 1000 - t_start / 1000));
+    Serial.println(F(" Hz"));
 }
 
 void loop()
