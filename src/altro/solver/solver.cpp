@@ -553,36 +553,15 @@ namespace altro
       // Print log
       if (opts.verbose > Verbosity::Silent)
       {
-        // fmt::print(
-        //     "  iter = {:3d}, phi = {:8.4g} -> {:8.4g} ({:10.3g}), dphi = {:10.3g} -> {:10.3g}, alpha = "
-        //     "{:8.3g}, ls_iter = {:2d}, stat = {:8.3e}, feas = {:8.3e}, rho = {:7.2g}, dual update? "
-        //     "{}\n",
-        //     iter, phi0_, phi_, cost_decrease, dphi0_, dphi_, alpha, ls_iters_, stationarity,
-        //     feasibility, penalty, dual_update);
-        Serial.print(F("  iter = "));
-        Serial.print(iter);
-        Serial.print(F(", phi = "));
-        Serial.print(phi0_);
-        Serial.print(F(" -> "));
-        Serial.print(phi_);
-        Serial.print(F(" ("));
-        Serial.print(cost_decrease);
-        Serial.print(F("), dphi = "));
-        Serial.print(dphi0_);
-        Serial.print(F(" -> "));
-        Serial.print(dphi_);
-        Serial.print(F(", alpha = "));
-        Serial.print(alpha);
-        Serial.print(F(", ls_iter = "));
-        Serial.print(ls_iters_);
-        Serial.print(F(", stat = "));
-        Serial.print(stationarity);
-        Serial.print(F(", feas = "));
-        Serial.print(feasibility);
-        Serial.print(F(", rho = "));
-        Serial.print(penalty);
-        Serial.print(F(", dual update? "));
-        Serial.println(dual_update);
+        Serial.println(
+            fmt::format(
+                fmt::fg(fmt::color::green_yellow),
+                "  iter = {:3d}, phi = {:8.4g} -> {:8.4g} ({:10.3g}), dphi = {:10.3g} -> {:10.3g}, alpha = "
+                "{:8.3g}, ls_iter = {:2d}, stat = {:8.3e}, feas = {:8.3e}, rho = {:7.2g}, dual update? "
+                "{}",
+                iter, phi0_, phi_, cost_decrease, dphi0_, dphi_, alpha, ls_iters_, stationarity,
+                feasibility, penalty, dual_update)
+                .c_str());
       }
 
       if (stop_iterating)

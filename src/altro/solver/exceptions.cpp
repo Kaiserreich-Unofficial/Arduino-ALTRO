@@ -4,7 +4,7 @@
 //
 
 #include "exceptions.hpp"
-
+#include <Arduino.h>
 #define FMT_HEADER_ONLY
 #include "fmt/core.h"
 
@@ -99,7 +99,11 @@ namespace altro
 
   void PrintErrorCode(ErrorCodes err)
   {
-    fmt::print("Got error code {}: {}\n", static_cast<int>(err), ErrorCodeToString(err));
+    // fmt::print("Got error code {}: {}\n", static_cast<int>(err), ErrorCodeToString(err));
+    Serial.print(F("Got error code "));
+    Serial.print(static_cast<int>(err));
+    Serial.print(F(": "));
+    Serial.println(ErrorCodeToString(err));
   }
 
 } // namespace altro
