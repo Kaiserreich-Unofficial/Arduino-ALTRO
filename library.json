@@ -20,5 +20,6 @@
   "dependencies":
   {
       "hideakitai/ArduinoEigen": "*"
+      "DarkWizarD24/fmt-arduino": "*"
   }
 }

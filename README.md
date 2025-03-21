@@ -23,7 +23,7 @@ The Arduino ALTRO library relies on customized libfmt for embedded device develo
 | Name         | URL                                                                                                                               |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | ArduinoEigen | [hideakitai/ArduinoEigen: Eigen (a C++ template library for linear algebra) for Arduino](https://github.com/hideakitai/ArduinoEigen) |
-| libfmt       | [fmtlib/fmt: A modern formatting librar](https://github.com/fmtlib/fmt)                                                              |
+| fmt-arduino  | [DarkWizarD24/fmt-arduino: Port of the {fmt} library to Arduino](https://github.com/DarkWizarD24/fmt-arduino)                        |
 
 # Notes
 

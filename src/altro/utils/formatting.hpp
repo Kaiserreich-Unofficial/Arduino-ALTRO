@@ -7,8 +7,7 @@
 
 #include <ArduinoEigenDense.h>
 
-#define FMT_HEADER_ONLY
-#include "fmt/core.h"
+#include <fmt.h>
 #include "fmt/ostream.h"
 
 
